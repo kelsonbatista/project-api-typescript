@@ -1,5 +1,3 @@
-interface ErrorHandler extends Error {
+export interface ErrorHandler extends Error {
   status?: number;
 }
-
-export default ErrorHandler;

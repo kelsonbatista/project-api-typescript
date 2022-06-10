@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
-import ErrorHandler from '../interfaces/errorInterface';
+import { ErrorHandler } from '../interfaces';
 
 const errorMiddleware = (err: ErrorHandler, _req: Request, res: Response, _next: NextFunction) => {
   if (err.status) {
