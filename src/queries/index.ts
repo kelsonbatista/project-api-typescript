@@ -1,3 +1,7 @@
 import productQueries from './productQueries';
+import userQueries from './userQueries';
 
-export default productQueries;
+export {
+  productQueries,
+  userQueries,
+};
