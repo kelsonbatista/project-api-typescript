@@ -10,41 +10,40 @@ class ProductModel {
     this.connection = connection;
   }
 
-  public async getAllProducts(): Promise<IProduct[]> {
+  public getAllProducts = async (): Promise<IProduct[]> => {
     const [products] = await this.connection.execute(queries.getAllProducts);
     return products as IProduct[];
-  }
+  };
 
-  public async getProductById(id: number): Promise<IProduct[]> {
+  public getProductById = async (id: string): Promise<IProduct[]> => {
     const [product] = await this.connection.execute(queries.getProductById, [id]);
     return product as IProduct[];
-  }
+  };
 
   // duas formas de escrever a funcao (create / update)
-  public async createProduct(product: IProduct): Promise<IProduct> {
+  public createProduct = async (product: IProduct): Promise<IProduct> => {
+    const { name, amount } = product;
     const [result] = await this.connection
-      .execute<ResultSetHeader>(queries.createProduct, product);
+      .execute<ResultSetHeader>(queries.createProduct, [name, amount]);
     return {
       id: result.insertId,
       ...product,
     };
-  }
+  };
 
   // duas formas de escrever a funcao (create / update)
-  public async updateProduct(id: number, product: IProduct): Promise<IProduct> {
-    const { name, amount, orderId } = product;
-    await this.connection.execute(queries.updateProduct, [name, amount, orderId, id]);
+  public updateProduct = async (id: string, product: IProduct): Promise<IProduct> => {
+    const { name, amount } = product;
+    await this.connection.execute(queries.updateProduct, [name, amount, id]);
     return {
-      id,
       name,
       amount,
-      orderId,
     };
-  }
+  };
 
-  public async deleteProduct(id: number): Promise<void> {
+  public deleteProduct = async (id: string): Promise<void> => {
     await this.connection.execute(queries.removeProduct, [id]);
-  }
+  };
 }
 
 export default ProductModel;
