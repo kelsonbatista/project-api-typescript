@@ -1,5 +1,6 @@
 import express from 'express';
 import ProductController from '../controllers/productController';
+import validateProduct from '../middlewares/validateProductMiddleware';
 
 const productRouter = express.Router();
 
@@ -9,7 +10,7 @@ productRouter.get('/', productController.getAllProducts);
 
 productRouter.get('/:id', productController.getProductById);
 
-productRouter.post('/', productController.createProduct);
+productRouter.post('/', validateProduct, productController.createProduct);
 
 productRouter.put('/:id', productController.updateProduct);
 
