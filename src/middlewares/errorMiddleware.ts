@@ -6,6 +6,7 @@ const errorMiddleware = (err: ErrorHandler, _req: Request, res: Response, _next:
   if (err.status) {
     return res.status(err.status).json({ message: err.message });
   }
+  console.log(err.message);
   return res
     .status(StatusCodes.INTERNAL_SERVER_ERROR)
     .json({ message: ReasonPhrases.INTERNAL_SERVER_ERROR });
