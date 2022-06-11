@@ -1,6 +1,6 @@
 import express from 'express';
 import UserController from '../controllers/userController';
-// import validateUser from '../middlewares/validateUserMiddleware';
+import validateUser from '../middlewares/validateUserMiddleware';
 
 const userRouter = express.Router();
 
@@ -10,7 +10,7 @@ userRouter.get('/', userController.getAllUsers);
 
 userRouter.get('/:id', userController.getUserById);
 
-userRouter.post('/', userController.createUser);
+userRouter.post('/', validateUser, userController.createUser);
 
 userRouter.put('/:id', userController.updateUser);
 
