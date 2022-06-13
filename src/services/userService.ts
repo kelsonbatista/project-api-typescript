@@ -1,5 +1,6 @@
 import UserModel from '../models/userModel';
 import { IUser } from '../interfaces';
+import { getToken } from '../utils/handleToken';
 
 class UserService {
   public model: UserModel;
@@ -18,13 +19,20 @@ class UserService {
     return result;
   };
 
-  public createUser = async (product: IUser): Promise<IUser> => {
-    const result = await this.model.createUser(product);
+  public getUserByUsername = async (username: string): Promise<IUser[]> => {
+    const result = await this.model.getUserByUsername(username);
     return result;
   };
 
-  public updateUser = async (id: string, product: IUser): Promise<IUser> => {
-    const result = await this.model.updateUser(id, product);
+  public createUser = async (user: IUser): Promise<object> => {
+    const result = await this.model.createUser(user);
+    const { password, ...userData } = result;
+    const token = getToken(userData);
+    return token;
+  };
+
+  public updateUser = async (id: string, user: IUser): Promise<IUser> => {
+    const result = await this.model.updateUser(id, user);
     return result;
   };
 
