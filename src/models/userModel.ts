@@ -20,6 +20,11 @@ class UserModel {
     return user as IUser[];
   };
 
+  public getUserByUsername = async (username: string): Promise<IUser[]> => {
+    const [user] = await this.connection.execute(userQueries.getUserByUsername, [username]);
+    return user as IUser[];
+  };
+
   // duas formas de escrever a funcao (create / update)
   public createUser = async (product: IUser): Promise<IUser> => {
     const { username, classe, level, password } = product;
