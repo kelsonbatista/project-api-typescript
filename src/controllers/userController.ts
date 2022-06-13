@@ -28,6 +28,16 @@ class UserController {
     }
   };
 
+  public getUserByUsername = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { username } = req.params;
+      const user = await this.service.getUserByUsername(username);
+      res.status(StatusCodes.OK).json(user);
+    } catch (err) {
+      next(err);
+    }
+  };
+
   public createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const user = req.body;
