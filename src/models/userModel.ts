@@ -26,19 +26,19 @@ class UserModel {
   };
 
   // duas formas de escrever a funcao (create / update)
-  public createUser = async (product: IUser): Promise<IUser> => {
-    const { username, classe, level, password } = product;
+  public createUser = async (user: IUser): Promise<IUser> => {
+    const { username, classe, level, password } = user;
     const [result] = await this.connection
       .execute<ResultSetHeader>(userQueries.createUser, [username, classe, level, password]);
     return {
       id: result.insertId,
-      ...product,
+      ...user,
     };
   };
 
   // duas formas de escrever a funcao (create / update)
-  public updateUser = async (id: string, product: IUser): Promise<IUser> => {
-    const { username, classe, level, password } = product;
+  public updateUser = async (id: string, user: IUser): Promise<IUser> => {
+    const { username, classe, level, password } = user;
     await this.connection.execute(userQueries.updateUser, [username, classe, level, password, id]);
     return {
       username,
