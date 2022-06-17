@@ -9,10 +9,9 @@ const userService = new UserService();
 
 declare module 'jsonwebtoken' {
   export interface UserIDJwtPayload extends jwt.JwtPayload {
-      id: number,
+    id: number,
   }
 }
-
 
 // verifica se o token existe no header
 // verifica se o token é valido

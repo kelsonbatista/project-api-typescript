@@ -1,14 +1,11 @@
 import OrderModel from '../models/orderModel';
-import ProductModel from '../models/productModel';
 import { IOrder } from '../interfaces';
 
 class OrderService {
   public model: OrderModel;
-  public productModel: ProductModel;
 
   constructor() {
     this.model = new OrderModel();
-    this.productModel = new ProductModel();
   }
 
   public getAllOrders = async (): Promise<IOrder[]> => {
@@ -30,7 +27,7 @@ class OrderService {
 
   public updateProductOrder = (orderId: number, productId: number): void => {
     this.model.updateProductOrder(orderId, productId);
-  }
+  };
 }
 
 export default OrderService;

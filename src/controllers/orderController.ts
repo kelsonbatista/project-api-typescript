@@ -2,9 +2,6 @@ import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import OrderService from '../services/orderService';
 
-type Products = {
-    productsIds: object,
-}
 class OrderController {
   public service: OrderService;
 
@@ -25,8 +22,8 @@ class OrderController {
     try {
       const [{ id }] = req.user;
       const { productsIds } = req.body;
-      const orderId = await this.service.createOrder(id);
-      productsIds.map((productId: number) => this.service.updateProductOrder(orderId, productId))
+      const orderId = await this.service.createOrder(Number(id));
+      productsIds.map((productId: number) => this.service.updateProductOrder(orderId, productId));
       const order = { userId: id, productsIds };
       res.status(StatusCodes.CREATED).json(order);
     } catch (err) {
